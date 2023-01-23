@@ -124,7 +124,76 @@ class MyGraph(FigureCanvas):
         self.updateFigure()
 
     def fotelAdd(self):
-        self.list_images.append(DraggableImage(self, size=0.6, image_path='fotel.jpg'))
+        self.list_images.append(DraggableImage(self, sizex=0.6, sizey=0.6, image_path='fotel.jpg'))
+        self.updateFigure()
+
+    def kanapaAdd(self):
+        self.list_images.append(DraggableImage(self, sizex=1.8, sizey=0.6, image_path='kanapa.jpg'))
+        self.updateFigure()
+
+    def kwiat1Add(self):
+        self.list_images.append(DraggableImage(self, sizex=0.5, sizey=0.5, image_path='kwiat.jpg'))
+        self.updateFigure()
+
+    def kwiat2Add(self):
+        self.list_images.append(DraggableImage(self, sizex=0.5, sizey=0.5, image_path='kwiat2.jpg'))
+        self.updateFigure()
+
+    def kwiat3Add(self):
+        self.list_images.append(DraggableImage(self, sizex=1.0, sizey=1.0, image_path='kwiat3.jpg'))
+        self.updateFigure()
+
+
+    def lezakAdd(self):
+        self.list_images.append(DraggableImage(self, sizex=0.5, sizey=1.0, image_path='lezak.jpg'))
+        self.updateFigure()
+
+    def lozkoAdd(self):
+        self.list_images.append(DraggableImage(self, sizex=1.4, sizey=1.5, image_path='lozko.jpg'))
+        self.updateFigure()
+
+    def naroznikAdd(self):
+        self.list_images.append(DraggableImage(self, sizex=1.8, sizey=1.0, image_path='naroznik.jpg'))
+        self.updateFigure()
+
+    def pralkaAdd(self):
+        self.list_images.append(DraggableImage(self, sizex=0.6, sizey=0.6, image_path='pralka.jpg'))
+        self.updateFigure()
+
+    def schody1Add(self):
+        self.list_images.append(DraggableImage(self, sizex=1.2, sizey=1.2, image_path='schody1.jpg'))
+        self.updateFigure()
+
+    def schody2Add(self):
+        self.list_images.append(DraggableImage(self, sizex=1.3, sizey=1.3, image_path='schody2.jpg'))
+        self.updateFigure()
+
+    def stolAdd(self):
+        self.list_images.append(DraggableImage(self, sizex=0.8, sizey=1.5, image_path='stol.jpg'))
+        self.updateFigure()
+
+    def szafki_pionAdd(self):
+        self.list_images.append(DraggableImage(self, sizex=0.5, sizey=1.5, image_path='szafki3pion.jpg'))
+        self.updateFigure()
+
+    def szafki_poziomAdd(self):
+        self.list_images.append(DraggableImage(self, sizex=1.5, sizey=0.5, image_path='szafki3poziom.jpg'))
+        self.updateFigure()
+
+    def telewizorAdd(self):
+        self.list_images.append(DraggableImage(self, sizex=1.0, sizey=0.2, image_path='telewizor.jpg'))
+        self.updateFigure()
+
+    def wannaAdd(self):
+        self.list_images.append(DraggableImage(self, sizex=0.6, sizey=1.2, image_path='wanna.jpg'))
+        self.updateFigure()
+
+    def zlewAdd(self):
+        self.list_images.append(DraggableImage(self, sizex=1.0, sizey=0.5, image_path='zlew.jpg'))
+        self.updateFigure()
+
+    def jacuzziAdd(self):
+        self.list_images.append(DraggableImage(self, sizex=1.5, sizey=1.5, image_path='jaccuzi.jpg'))
         self.updateFigure()
 
     def siatkaRemove(self):
@@ -134,26 +203,3 @@ class MyGraph(FigureCanvas):
     def siatkaAdd(self):
         self.axes.grid(True)
         self.updateFigure()
-    # def mouseDoubleClickEvent(self, event: QMouseEvent):
-    #     # TODO add the point when clicked
-    # x = event.x()
-    # y = event.y()
-    # x = event.windowPos().x()
-    # y = event.windowPos().y()
-    # x = event.pos().x()
-    # y = event.pos().y()
-    # self.
-    # print("x y ", x, y)
-    # print("Lista punktów myszkax2: ", self.list_points)
-    # self.list_points.append(DraggablePoint(self, x, y, 3))
-    # print("mouse Dodano 2. punkt")
-    # print("Lista punktów myszkax2: ", self.list_points)
-    # self.updateFigure()
-    # print("Lista punktów myszkax2: ", self.list_points)
-    # super().mouseDoubleClickEvent(event)
-    # print("Lista punktów myszkax2: ", self.list_points)
-
-# if __name__ == '__main__':
-#     app = QtWidgets.QApplication(sys.argv)
-#     ex = MyGraph()
-#     sys.exit(app.exec_())

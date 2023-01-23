@@ -6,10 +6,10 @@ from matplotlib.image import AxesImage
 class DraggableImage:
     lock = None  # only one can be animated at a time
 
-    def __init__(self, parent, x=15, y=10, size=2, image_path='obraz.jpg'):
+    def __init__(self, parent, x=15, y=10, sizex=2, sizey=2, image_path='obraz.jpg'):
         self.parent = parent
         self.image = plt.imread(image_path)
-        self.point = AxesImage(parent.fig.axes[0], cmap='gray', origin='upper', extent=(x-size, x+size, y-size, y+size), alpha=1)
+        self.point = AxesImage(parent.fig.axes[0], cmap='gray', origin='upper', extent=(x-sizex, x+sizex, y-sizey, y+sizey), alpha=1)
         self.point.set_data(self.image)
         parent.fig.axes[0].add_artist(self.point)
         self.press = None
