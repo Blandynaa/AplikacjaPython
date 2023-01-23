@@ -109,12 +109,15 @@ class MainWindow(QMainWindow):
 
         self.refresh_action = QAction("Odśwież", self)
         self.refresh_action.triggered.connect(self.graph.draw)
-        #self.toolbar.addAction(self.refresh_action)
+
+        self.save_action = QAction("Zapisz jako...", self)
+        self.save_action.triggered.connect(self.graph.save_as_image)
 
         self.menu = self.menuBar()
         self.file_menu = self.menu.addMenu("Plik")
         self.file_menu.addAction(self.clear_action)
         self.file_menu.addAction(self.refresh_action)
+        self.file_menu.addAction(self.save_action)
 
         self.setWindowTitle("Projekt mieszkania 2D")
         self.show()

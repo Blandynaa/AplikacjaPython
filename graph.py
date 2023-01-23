@@ -1,21 +1,20 @@
 import sys
 import matplotlib
+from matplotlib import pyplot as plt
 
 matplotlib.use("Qt5Agg")
 from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtCore import QPoint, QEvent
+from PyQt5.QtCore import QPoint, QEvent, QStandardPaths
 from PyQt5.QtGui import QMouseEvent
+from PyQt5.QtWidgets import QFileDialog
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-# Personnal modules
 from drag import DraggablePoint
 from mebell import DraggableImage
 
 
 class MyGraph(FigureCanvas):
-    """A canvas that updates itself every second with a new plot."""
-
     def __init__(self, parent, width=18, height=12, dpi=80):
         self.parent = parent
         self.fig = Figure(figsize=(width, height), dpi=dpi)
@@ -36,67 +35,31 @@ class MyGraph(FigureCanvas):
 
         self.list_points = []
         self.list_images = []
-        # self.list_points   #= self.parent.list_points
-        # print(self.list_points)
 
         self.show()
-        # self.plotFirstPoint()
-        # self.plotDraggablePoints()
-        # self.plotDraggablePoints2(2, 2)
-        # self.add_image()
-        # self.list_points.pop(-1)
-        # self.updateFigure()
 
-    #
-    # def add_image(self):
-    #     print("Dodawanie obrazka")
-    #     #image_path = 'C:\Users\win10\Desktop\zrzut.jpg'
-    #     self.list_images.append(DraggableImage(self))
-    #     self.updateFigure()
-    #     print("koniec dodawania obrazka")
+        self.mime_type_filters = ["image/png", "image/jpeg"]
 
     def plotFirstPoint(self, size=1):
-        """Plot and define the 2 draggable points of the baseline"""
-        print("Dodanie początkowego punktu:")
-        # del(self.list_points[:])
         self.list_points.append(DraggablePoint(self, 2, 2, size))
-        print("Dodano 1. punkt")
+
         self.updateFigure()
         self.parent.list_points = self.list_points
 
     def plotDraggablePoints(self, size=1):
-        """Plot and define the 2 draggable points of the baseline"""
-        print("Rozpoczecie dodawania:")
-        # del(self.list_points[:])
         self.list_points.append(DraggablePoint(self, 5, 5, size))
-        print("Dodano 1. punkt")
         self.list_points.append(DraggablePoint(self, 10, 10, size))
-        print("Dodano 2. punkt")
-        # self.list_points.append(DraggablePoint(self, 15, 10, size))
-        # print("Dodano 3. punkt")
-        # self.list_points.append(DraggablePoint(self, 20, 10, size))
-        # print("Dodano 4. punkt")
-        # self.list_points.append(DraggablePoint(self, 20, 5, size))
-        # self.list_points.append(self.list_points[0])
-        # print("Dodano 5. punkt")
+
         self.updateFigure()
         self.parent.list_points = self.list_points
 
     def plotDraggablePoints2(self, x, y):
-        """Plot and define the 2 draggable points of the baseline"""
-        print("Rozpoczecie dodawania:")
-        # del(self.list_points[:])
         self.list_points.append(DraggablePoint(self, x, y, 1))
-        print("2Dodano 1. punkt")
-        # self.list_points.append(DraggablePoint(self, 10, 10, 1))
-        # print("2Dodano 2. punkt")
+
         self.updateFigure()
         self.parent.list_points = self.list_points
-        print("Lista parenta po 2 dodaniu punktow:", self.parent.list_points)
 
     def clearFigure(self):
-        """Clear the graph"""
-
         self.axes.clear()
         self.axes.set_xlim(0, 30)
         self.axes.set_ylim(0, 20)
@@ -104,11 +67,10 @@ class MyGraph(FigureCanvas):
         self.axes.locator_params(axis='y', nbins=20)
         del (self.list_points[:])
         del (self.list_images[:])
+
         self.updateFigure()
 
     def updateFigure(self):
-        """Update the graph. Necessary, to call after each plot"""
-
         self.draw()
 
     def mouseDoubleClickEvent(self, event: QMouseEvent):
@@ -118,10 +80,27 @@ class MyGraph(FigureCanvas):
         x, y = point[0], point[1]
         size = 1  # Default size of the point
         self.list_points.append(DraggablePoint(self, x, y, size))
-        # self.list_images.append(DraggableImage(self))
-        print("lista obrazkow", self.list_images)
 
         self.updateFigure()
+
+    def save_as_image(self):
+        self.axes.figure.savefig('projekt.png', bbox_inches='tight', pad_inches=0)
+
+    def save_as_image(self):
+
+        dialog = QFileDialog(self, "Save File")
+        dialog.setMimeTypeFilters(self.mime_type_filters)
+        dialog.setFileMode(QFileDialog.AnyFile)
+        dialog.setAcceptMode(QFileDialog.AcceptSave)
+        dialog.setDefaultSuffix("png")
+        dialog.setDirectory(
+            QStandardPaths.writableLocation(QStandardPaths.PicturesLocation)
+        )
+
+        if dialog.exec() == QFileDialog.Accepted:
+            if dialog.selectedFiles():
+                self.axes.figure.savefig(dialog.selectedFiles()[0], bbox_inches='tight', pad_inches=0)
+                #self.painter_widget.save(dialog.selectedFiles()[0])
 
     def fotelAdd(self):
         self.list_images.append(DraggableImage(self, sizex=0.6, sizey=0.6, image_path='fotel.jpg'))
