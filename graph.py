@@ -77,12 +77,6 @@ class MyGraph(FigureCanvas):
         self.updateFigure()
 
     def clearWalls(self):
-        # self.axes.clear()
-        # self.axes.set_xlim(0, 30)
-        # self.axes.set_ylim(0, 20)
-        # self.axes.locator_params(axis='x', nbins=30)
-        # self.axes.locator_params(axis='y', nbins=20)
-        # self.axes.grid(True
         for i in range(len(self.list_points) - 1, -1, -1):
             self.list_points[i].remove()
             self.list_points.pop(i)
@@ -96,6 +90,7 @@ class MyGraph(FigureCanvas):
 
     def clearWall(self):
         del (self.list_points[-1])
+
         self.updateFigure()
 
     def updateFigure(self):
@@ -128,7 +123,6 @@ class MyGraph(FigureCanvas):
         if dialog.exec() == QFileDialog.Accepted:
             if dialog.selectedFiles():
                 self.axes.figure.savefig(dialog.selectedFiles()[0], bbox_inches='tight', pad_inches=0)
-                #self.painter_widget.save(dialog.selectedFiles()[0])
 
     def fotelAdd(self):
         self.list_images.append(DraggableImage(self, sizex=0.6, sizey=0.6, image_path='fotel.jpg'))
@@ -149,7 +143,6 @@ class MyGraph(FigureCanvas):
     def kwiat3Add(self):
         self.list_images.append(DraggableImage(self, sizex=1.0, sizey=1.0, image_path='kwiat3.jpg'))
         self.updateFigure()
-
 
     def lezakAdd(self):
         self.list_images.append(DraggableImage(self, sizex=0.5, sizey=1.0, image_path='lezak.jpg'))
