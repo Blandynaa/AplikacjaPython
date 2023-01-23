@@ -65,9 +65,37 @@ class MyGraph(FigureCanvas):
         self.axes.set_ylim(0, 20)
         self.axes.locator_params(axis='x', nbins=30)
         self.axes.locator_params(axis='y', nbins=20)
+        self.axes.grid(True)
         del (self.list_points[:])
         del (self.list_images[:])
 
+        self.updateFigure()
+
+    def clearImages(self):
+        del (self.list_images[:])
+
+        self.updateFigure()
+
+    def clearWalls(self):
+        # self.axes.clear()
+        # self.axes.set_xlim(0, 30)
+        # self.axes.set_ylim(0, 20)
+        # self.axes.locator_params(axis='x', nbins=30)
+        # self.axes.locator_params(axis='y', nbins=20)
+        # self.axes.grid(True
+        for i in range(len(self.list_points) - 1, -1, -1):
+            self.list_points[i].remove()
+            self.list_points.pop(i)
+
+        self.updateFigure()
+
+    def clearImage(self):
+        del (self.list_images[-1])
+
+        self.updateFigure()
+
+    def clearWall(self):
+        del (self.list_points[-1])
         self.updateFigure()
 
     def updateFigure(self):

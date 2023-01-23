@@ -101,11 +101,11 @@ class MainWindow(QMainWindow):
 
         self.siatka1_action = QAction("Usuń siatkę", self)
         self.siatka1_action.triggered.connect(self.graph.siatkaRemove)
-        self.toolbar.addAction(self.siatka1_action)
+        #self.toolbar.addAction(self.siatka1_action)
 
         self.siatka2_action = QAction("Dodaj siatkę", self)
         self.siatka2_action.triggered.connect(self.graph.siatkaAdd)
-        self.toolbar.addAction(self.siatka2_action)
+        #self.toolbar.addAction(self.siatka2_action)
 
         self.refresh_action = QAction("Odśwież", self)
         self.refresh_action.triggered.connect(self.graph.draw)
@@ -113,12 +113,33 @@ class MainWindow(QMainWindow):
         self.save_action = QAction("Zapisz jako...", self)
         self.save_action.triggered.connect(self.graph.save_as_image)
 
+        self.del_walls_action = QAction("Usuń wszystkie ściany", self)
+        self.del_walls_action.triggered.connect(self.graph.clearWalls)
+
+        self.del_wall_action = QAction("Usuń ostatnio dodaną ścianę", self)
+        self.del_wall_action.triggered.connect(self.graph.clearWall)
+
+        self.del_images_action = QAction("Usuń wszystkie meble", self)
+        self.del_images_action.triggered.connect(self.graph.clearImages)
+
+        self.del_image_action = QAction("Usuń ostatnio dodany mebel", self)
+        self.del_image_action.triggered.connect(self.graph.clearImage)
+
         self.menu = self.menuBar()
         self.file_menu = self.menu.addMenu("Plik")
-        self.file_menu.addAction(self.clear_action)
+
         self.file_menu.addAction(self.refresh_action)
         self.file_menu.addAction(self.save_action)
-
+        self.wall_menu = self.menu.addMenu("Obszar projektu")
+        self.wall_menu.addAction(self.clear_action)
+        #self.wall_menu.addAction(self.del_walls_action)  #usuń wszystkie ściany
+        #self.wall_menu.addAction(self.del_wall_action)  #usuń ostatnio dodaną ścianę
+        # self.meble_menu = self.menu.addMenu("Opcje mebli")
+        # self.meble_menu.addAction(self.del_images_action)
+        # self.meble_menu.addAction(self.del_image_action)
+        self.siatka_menu = self.menu.addMenu("Ustawienia tła")
+        self.siatka_menu.addAction(self.siatka1_action)
+        self.siatka_menu.addAction(self.siatka2_action)
         self.setWindowTitle("Projekt mieszkania 2D")
         self.show()
 
