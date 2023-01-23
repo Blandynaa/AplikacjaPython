@@ -46,6 +46,7 @@ class MyGraph(FigureCanvas):
         # self.add_image()
         # self.list_points.pop(-1)
         # self.updateFigure()
+
     #
     # def add_image(self):
     #     print("Dodawanie obrazka")
@@ -101,8 +102,8 @@ class MyGraph(FigureCanvas):
         self.axes.set_ylim(0, 20)
         self.axes.locator_params(axis='x', nbins=30)
         self.axes.locator_params(axis='y', nbins=20)
-        self.axes.grid(True)
         del (self.list_points[:])
+        del (self.list_images[:])
         self.updateFigure()
 
     def updateFigure(self):
@@ -117,11 +118,22 @@ class MyGraph(FigureCanvas):
         x, y = point[0], point[1]
         size = 1  # Default size of the point
         self.list_points.append(DraggablePoint(self, x, y, size))
-        self.list_images.append(DraggableImage(self))
+        # self.list_images.append(DraggableImage(self))
         print("lista obrazkow", self.list_images)
 
         self.updateFigure()
 
+    def fotelAdd(self):
+        self.list_images.append(DraggableImage(self, size=0.6, image_path='fotel.jpg'))
+        self.updateFigure()
+
+    def siatkaRemove(self):
+        self.axes.grid(False)
+        self.updateFigure()
+
+    def siatkaAdd(self):
+        self.axes.grid(True)
+        self.updateFigure()
     # def mouseDoubleClickEvent(self, event: QMouseEvent):
     #     # TODO add the point when clicked
     # x = event.x()
